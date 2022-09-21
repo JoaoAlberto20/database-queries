@@ -1,12 +1,13 @@
 import {
-  Connection, createConnection, getRepository, Repository,
+  Connection, createConnection, getRepository, Repository
 } from 'typeorm';
 
 import { Game } from '../modules/games/entities/Game';
+import { GamesRepository } from '../modules/games/repositories/implementations/GamesRepository';
 import { User } from '../modules/users/entities/User';
 
 import { UsersRepository } from '../modules/users/repositories/implementations/UsersRepository';
-import { GamesRepository } from '../modules/games/repositories/implementations/GamesRepository';
+// import { GamesRepository } from '../modules/games/repositories/implementations/GamesRepository';
 
 const usersSeed: User[] = [
   {
@@ -96,6 +97,7 @@ describe('Repositories', () => {
       user_id,
     });
 
+
     expect(user).toMatchObject({
       first_name: 'Danilo',
       last_name: 'Vieira',
@@ -165,6 +167,8 @@ describe('Repositories', () => {
     const result1 = await gamesRepository.findByTitleContaining('of u');
     const result2 = await gamesRepository.findByTitleContaining('eed');
     const result3 = await gamesRepository.findByTitleContaining('rocket league');
+
+    console.log(result1)
 
     expect(result1).toEqual([
       expect.objectContaining({
